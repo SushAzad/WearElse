@@ -49,3 +49,7 @@ body {
 .title a {
     color: #000;
 }
+
+.modal-title{
+	display: inline;
+}

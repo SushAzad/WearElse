@@ -17,7 +17,7 @@
 		<br><br><br>
 		<div class="search row">
 			<div class = "col-xs-10">
-				<input id="search-query" class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search">
+				<input id="search-query" class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search" required/>
 			</div>
 			<div class = "col-xs-2">
 				<input id = "submit-query" class="form-control" type="submit" value="Find it!" aria-label="Search">
@@ -27,14 +27,19 @@
 </body>
 
 <footer>
-	<script src='js/bootstrap.min.js'></script>
-	<script src='../my.js'></script>
+	<script src='{{url_for('static', filename='jquery-3.0.0.min.js')}}'></script>
+	<script src='{{url_for('static', filename='bootstrap.min.js')}}'></script>
+
 	<script> 
 	var button = document.getElementById("submit-query");
 	button.onclick = function(){
 		var query_string = document.getElementById("search-query").value
-		console.log("{{ url_for('handle_data') }}?query=\'" + query_string+"\'");
-		window.location.href = "{{ url_for('handle_data') }}?query=\'" + query_string+"\'";
+		// don't allow empty queries as that overloads Nordstrom's API 
+		if(query_string!=""){
+			console.log("{{ url_for('handle_data') }}?query=\'" + query_string+"\'");
+			window.location.href = "{{ url_for('handle_data') }}?query=\'" + query_string+"\'";
+		}
+		
 	};
 
 	</script>
