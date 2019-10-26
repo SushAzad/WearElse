@@ -40,3 +40,12 @@ body {
   display: flex;
   align-items: center;
 } 
+
+.title a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.title a {
+    color: #000;
+}

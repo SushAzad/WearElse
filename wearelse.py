@@ -27,7 +27,7 @@ def hello(name=None):
 def handle_data():
 	# print(request.args['query'])
     #projectpath = request.form['projectFilepath']
-	print(request.args.get('query'))
+	# print(request.args.get('query'))
 	nordstromResults = json.loads(getNordstromResults(request.args.get('query')))
 	etsyResults = json.loads(getEtsyResults(request.args.get('query')))
 
