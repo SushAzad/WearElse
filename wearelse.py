@@ -8,6 +8,16 @@ from apis import getNordstromResults, getEtsyResults
 app = Flask(__name__)
 
 
+test = [
+	{"title": "Black turtleneck sweater", "description": "100% cotton, from H&M!", "link": "http://google.com", 
+    "img_url": "http://jiaqiwu.com/portrait_2019.jpeg", "price": 8.99, "sale_price": 8.99}, 
+  {"title": "Purple turtleneck sweater", "description": "100% cotton, from H&M!", "link": "http://google.com", 
+    "img_url": "http://jiaqiwu.com/portrait_2019.jpeg", "price": 8.99, "sale_price": 8.99}, 
+  {"title": "Pink turtleneck sweater", "description": "100% cotton, from H&M!", "link": "http://google.com", 
+    "img_url": "http://jiaqiwu.com/portrait_2019.jpeg", "price": 8.99, "sale_price": 8.99}, 
+]
+
+
 @app.route('/')
 def hello(name=None):
     return render_template('index.html', name=name)
@@ -28,6 +38,7 @@ Items list has JSON object of
 img, title, price for each item.
 '''
 @app.route('/results')
-def query(items_list=None):
-	print(url_for('static', filename='main.css'))
-	return render_template('hello.html', items=items_list, main_css=url_for('static', filename='main.css'))
+def get_search_results(items_list=None):
+	
+	return render_template('results.html', items=test)
+

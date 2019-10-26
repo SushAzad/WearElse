@@ -1,29 +1,35 @@
 <html>
 <head>
-	<link href='../css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-	<link href='../css/main.css' rel='stylesheet' type='text/css'>
+	<link href='{{url_for('static', filename='bootstrap.min.css')}}' rel='stylesheet' type='text/css'>
+	<link href='{{url_for('static', filename='main.css')}}' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 	<h1 class = "title"> WearElse </h1>
 	<div class = "container">
-		<!-- Search form -->
-		<div class = "row cloth">
-			<div class ="img col-xs-4"><img src="ghost.jpg"></div>
-			<div class ="description col-xs-8">Levi's Jeans Size 1 $69</div>
-		</div>
+		{% for item in items %}
+			<div class = "row cloth">
+				<div class ="img col-xs-4"><img src="{{item.img_url}}"></div>
+				<div class ="description col-xs-6">
+					<h3>{{item.title}}</h3> 
+					<p>{{item.description}}</p>
+					<h5>{{item.price}}</h5>
+					<br>
 
-		<div class = "row cloth">
-			<div class ="img col-xs-4"><img src="ghost.jpg"></div>
-			<div class ="description col-xs-8">Levi's Jeans Size 1 $69</div>
-		</div>
+				</div>
+				<div class = "link">
+					<a href = "{{item.link}}" target="_blank"><button type="button" class="btn btn-primary">See More</button></a>
+				</div>
+
+			</div>
+	  {% endfor %}
 </body>
 
 <footer>
 	<!--<script src='js/jquery-3.0.0.min.js'></script>
 	<script src='js/jquery-ui-1.12.1.min.js'></script>
-	<script src='js/bootstrap.min.js'></script>-->
-	<script src='../my.js'></script>
+	<script src='js/bootstrap.min.js'></script>
+	<script src='my.js'></script>-->
 </footer>
 
 </html>
