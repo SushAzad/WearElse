@@ -32,6 +32,7 @@ def handle_data():
 	etsyResults = json.loads(getEtsyResults(request.args.get('query')))
 
 	total = nordstromResults["results"] + etsyResults["results"]
+	random.shuffle(total)
 	result = json.dumps({"results": total})
 	#r = requests.post(url_for('get_search_results'), data = result)
 	pretty_query = request.args.get('query')

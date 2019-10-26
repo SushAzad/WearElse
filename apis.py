@@ -30,8 +30,16 @@ def getEtsyResults(query):
             print(d['url'])
             print(data2['results'][0]['url_570xN'])
             
-            res.append({"title": d['title'],
-                "description": d['description'],
+            short_title = d['title']
+            if len(short_title) > 100: 
+                short_title = short_title[:100] + "..."
+
+            short_des = d['description']
+            if len(short_des) > 400: 
+                short_des = short_des[:400] + "..."
+
+            res.append({"title": short_title,
+                "description": short_des,
                 "price": d['price'],
                 "link": d['url'],
                 "img_url": data2['results'][0]['url_570xN']})
@@ -82,7 +90,7 @@ def getNordstromResults(query):
         prodPageUrl = "https://shop.nordstrom.com"+str(json_data["productsById"][key]["productPageUrl"])
         # print("Product Page Url: ",prodPageUrl)
         res.append({"title": title,
-                    "description": query,
+                    "description": title,
                     "link": prodPageUrl,
                     "img_url": img_url,
                     "price": price})
