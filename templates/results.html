@@ -8,17 +8,6 @@
 	<h1 class = "title"><a href="/"> WearElse </a></h1>
 
 	<div class = "container">
-	
-<!--			<div class = "col-xs-offset-2 col-xs-6">
-				<input id="email" class="form-control" type="text" placeholder="email address" />
-			</div>
-			<div class = "col-xs-1">
-				<input id="max_price" class="form-control" type="numeric" placeholder="420.00" />
-			</div>
-			<div class = "col-xs-1">
-				<input id = "submit-query" class="form-control" type="submit" value="Alert Me!" aria-label="Search">
-			</div>
-		</div> -->
 		<div class="search row">
 			<div class = "col-xs-offset-1 col-xs-6">
 				<input id="search-query" class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search" required/>
@@ -34,8 +23,8 @@
 		<h2>Results: </h2>
 		{% for item in items %}
 			<div class = "row cloth">
-				<div class ="img col-xs-4"><img src="{{item.img_url}}"></div>
-				<div class ="description col-xs-6">
+				<div class ="img col-xs-offset-1 col-xs-4"><img src="{{item.img_url}}"></div>
+				<div class ="description col-xs-5">
 					<h3>{{item.title}}</h3> 
 					<p>{{item.description}}</p>
 					<h3>${{item.price}}</h3>
