@@ -1,11 +1,52 @@
-import requests
 import random
+import requests
+import configparser
 import json
 
-def nordstrom(query):
+def getEtsyResults(query):
+    URL = "https://openapi.etsy.com/v2/listings/active"
+
+    parser = configparser.ConfigParser()
+    try:
+        parser.read('config.ini')
+        PARAMS = {"api_key": parser.get('ebay_api', 'api_key'),
+            "keywords": query,
+            "category": "Clothing",
+            "limit": 5}
+        r = requests.get(url = URL, params = PARAMS)
+
+        data = r.json()
+        print(data)
+        res = []
+        for d in data['results']:
+            URL2 = "https://openapi.etsy.com/v2/listings/" + str(d['listing_id']) + "/images"
+            PARAMS2 = {"api_key": "xhshosdpo1y0alvwy572r4gc"}
+            r2 = requests.get(url = URL2, params = PARAMS2)
+            data2 = r2.json()
+            
+            print(d['title'])
+            print(d['description'])
+            print(d['price'])
+            print(d['url'])
+            print(data2['results'][0]['url_570xN'])
+
+            res.append({"title": d['title'],
+                "description": d['description'],
+                "price": d['price'],
+                "link": d['url'],
+                "img_url": data2['results'][0]['url_570xN']})
+
+        return json.dumps({"results": res})
+    except:
+        print("ERROR: config.ini not created or request is bad")
+        return json.dumps({"results" : []}) 
+
+def getNordstromResults(query):
+    # query = str(query)
     res = []
     space_escaped = query.replace(" ", "%20") + "/"
     url = "https://shop.nordstrom.com/api/search/"+space_escaped
+    print(url)
     querystring = {"top":"72","isMobile":"false","origin":"keywordsearch"}
     headers = {
         'User-Agent': "PostmanRuntime/7.18.0",
@@ -19,23 +60,26 @@ def nordstrom(query):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
+    print(response)
     json_data = json.loads(response.text)
     count = 0
     for key in json_data["productsById"].keys():
         if count >5:
             break
         count +=1
-        title = json_data["pageData"][key]["name"]
-        print(title)
+        title = json_data["productsById"][key]["name"]
         price = json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"]
         # print("Original Price: ", price)
-       # sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
+        #sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
         # print("Sale Price: ",sale_price)
         media = json_data["productsById"][key]["mediaById"]
-        im = random.choice(list(media.keys()))
-        img_url = json_data["productsById"][key]["mediaById"][im]["src"]
+        img_url= ""
+        for k in media.keys():
+            if media[k]["group"]=="main":
+                img_url = media[k]["src"]
+                break
         # print("Image URL:",img_url )
-        prodPageUrl = "nordstom.com"+str(json_data["productsById"][key]["productPageUrl"])
+        prodPageUrl = "https://shop.nordstrom.com"+str(json_data["productsById"][key]["productPageUrl"])
         # print("Product Page Url: ",prodPageUrl)
         res.append({"title": title,
                     "description": query,
@@ -46,7 +90,3 @@ def nordstrom(query):
     results =  json.dumps({"results":res})
     print(results)
     return results
-
-
-q = "Air Jordan"
-results = nordstrom(q)
