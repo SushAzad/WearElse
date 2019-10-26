@@ -10,10 +10,10 @@
 		<!-- Search form -->
 		<div class="search row">
 			<div class = "col-md-10">
-				<input class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search">
+				<input id="search-query" class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search">
 			</div>
 			<div class = "col-md-2">
-				<a href="results.html"><input class="form-control" type="submit" placeholder="Find it!" aria-label="Search"></a>
+				<input id = "submit-query" class="form-control" type="submit" placeholder="Find it!" aria-label="Search">
 			</div>
 		</div>
 	</div>
@@ -22,8 +22,20 @@
 <footer>
 	<!--<script src='js/jquery-3.0.0.min.js'></script>
 	<script src='js/jquery-ui-1.12.1.min.js'></script>
+	<script src='js/bootstrap.min.js'></script>-->
 	<script src='js/bootstrap.min.js'></script>
-	<script src='../my.js'></script>-->
+	<script src='../my.js'></script>
+	<script> 
+	var button = document.getElementById("submit-query");
+	button.onclick = function(){
+		var query_string = document.getElementById("search-query").value
+		console.log("{{ url_for('handle_data') }}?query=\'" + query_string+"\'");
+		window.location.href = "{{ url_for('handle_data') }}?query=\'" + query_string+"\'";
+	};
+
+	</script>
+
 </footer>
+
 
 </html>

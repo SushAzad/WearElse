@@ -1,9 +1,12 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
+import random
 import requests
 import configparser
 import json
+from apis import getNordstromResults, getEtsyResults
 
 app = Flask(__name__)
+
 
 test = [
 	{"title": "Black turtleneck sweater", "description": "100% cotton, from H&M!", "link": "http://google.com", 
@@ -15,59 +18,30 @@ test = [
 ]
 
 
-# @app.route('/')
-# def hello_word():
-# 	return 'Hello, World!'
-
 @app.route('/')
 def hello(name=None):
     return render_template('index.html', name=name)
 
-def getEbayResults(query):
-	URL = "https://openapi.etsy.com/v2/listings/active"
 
-	parser = configparser.ConfigParser()
-	try:
-		parser.read('config.ini')
-		PARAMS = {"api_key": parser.get('ebay_api', 'api_key'),
-	#PARAMS = {"api_key": "xhshosdpo1y0alvwy572r4gc",
-			"keywords": query,
-			"category": "Clothing",
-			"limit": 5}
-		r = requests.get(url = URL, params = PARAMS)
+@app.route('/handle_data', methods=['GET'])
+def handle_data():
+	# print(request.args['query'])
+    #projectpath = request.form['projectFilepath']
+	print(request.args.get('query'))
+	nordstromResults = json.loads(getNordstromResults(request.args.get('query')))
+	etsyResults = json.loads(getEtsyResults(request.args.get('query')))
 
-		data = r.json()
-		print(data)
-		res = []
-		for d in data['results']:
-			URL2 = "https://openapi.etsy.com/v2/listings/" + str(d['listing_id']) + "/images"
-			PARAMS2 = {"api_key": "xhshosdpo1y0alvwy572r4gc"}
-			r2 = requests.get(url = URL2, params = PARAMS2)
-			data2 = r2.json()
-			
-			print(d['title'])
-			print(d['description'])
-			print(d['price'])
-			print(d['url'])
-			print(data2['results'][0]['url_570xN'])
-
-			res.append({"title": d['title'],
-				"description": d['description'],
-				"price": d['price'],
-				"link": d['url'],
-				"img_url": data2['results'][0]['url_570xN']})
-
-		return json.dumps({"results": res})
-	except:
-		print("ERROR: config.ini not created or request is bad")
-
-
+	total = nordstromResults["results"] + etsyResults["results"]
+	result = json.dumps({"results": total})
+	#r = requests.post(url_for('get_search_results'), data = result)
+	return render_template('results.html', items=total)
 '''
 Items list has JSON object of 
 img, title, price for each item.
 '''
-@app.route('/results')
+@app.route('/results', methods=["POST"])
 def get_search_results(items_list=None):
-	
-	return render_template('results.html', items=test)
+	json_dict = request.get_json()
+	items_list = json_dict["results"]
+	return render_template('results.html', items=items_list)
 
