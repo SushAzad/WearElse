@@ -2,28 +2,34 @@
 <head>
 	<link href='{{url_for('static', filename='bootstrap.min.css')}}' rel='stylesheet' type='text/css'>
 	<link href='{{url_for('static', filename='main.css')}}' rel='stylesheet' type='text/css'>
+	<link href='{{url_for('static', filename='fontawesome/css/all.css')}}' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-	<h1 class = "title"><a href="/"> WearElse </a></h1>
-	<div class = "container">
-		<div class = "about">
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-			<br><br>
-			It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-			<br><br>
-			<b>Usage tips:</b> bla bla bla </p>
+	<div position="relative">
+		<div id="top-corner"><i class="fas fa-info-circle"></i>
 		</div>
-		<br><br><br>
-		<div class="search row">
-			<div class = "col-xs-10">
-				<input id="search-query" class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search">
-			</div>
-			<div class = "col-xs-2">
-				<input id = "submit-query" class="form-control" type="submit" value="Find it!" aria-label="Search">
+		<div id="about">
+			WearElse helps you find where else you can buy a particular item!
+		</div>
+	</div>
+	
+	<div class="main">
+		<img id="logo" src="{{url_for('static', filename='logo.jpg')}}" />
+		<h1 class = "title"><a href="/"> WearElse </a></h1>
+		<div class = "container">
+			<br>
+			<div class="search row">
+				<div class = "col-xs-offset-2 col-xs-6">
+					<input id="search-query" class="form-control" type="text" placeholder="What are you looking for?" aria-label="Search">
+				</div>
+				<div class = "col-xs-2">
+					<input id = "submit-query" class="form-control" type="submit" value="Find it!" aria-label="Search">
+				</div>
 			</div>
 		</div>
 	</div>
+	
 </body>
 
 <footer>
@@ -37,6 +43,13 @@
 		window.location.href = "{{ url_for('handle_data') }}?query=\'" + query_string+"\'";
 	};
 
+	var info = document.getElementById("top-corner");
+	info.onmouseover = function() {
+		document.getElementById('about').style.visibility="visible";
+	}
+	info.onmouseout = function() {
+		document.getElementById('about').style.visibility="hidden";
+	}
 	</script>
 
 </footer>
