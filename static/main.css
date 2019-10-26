@@ -1,3 +1,23 @@
+h1 {
+	color: #5eb7b7;
+	font-size: 3.5em;
+}
+
+body {
+	background-color: #dcefec;
+	margin-top: 20%;
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: center;
+}
+
+#submit-query {
+	border-color: #fc7978;
+	color: #fc7978;
+	font-weight: bold;
+	background-color: #ffe6e6;
+}
+
 .title {
 	text-align: center;
 }

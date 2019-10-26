@@ -39,7 +39,7 @@ def getEtsyResults(query):
         return json.dumps({"results": res})
     except:
         print("ERROR: config.ini not created or request is bad")
-        return json.dumps({"results" : []}) 
+        return json.dumps({"results" : []})
 
 def getNordstromResults(query):
     # query = str(query)
