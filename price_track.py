@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from priceChecker import getEtsyPrice, getNordstromPrice
 import smtplib
-
+import json
 
 
 url = "https://www.amazon.com/Apple-MacBook-Retina-2-8GHz-Quad-core/dp/B07SKPVDFF/ref=sr_1_1_sspa?keywords=mac&qid=1572122606&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzQkNBMklFSDJFNFFQJmVuY3J5cHRlZElkPUEwNjM0MzIzSlYzWlI5SEVXVzZXJmVuY3J5cHRlZEFkSWQ9QTA3NjYwMzBGNFo4RE5XTzRNS04md2lkZ2V0TmFtZT1zcF9hdGYmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl"
@@ -21,10 +21,17 @@ def compare(url, price, email):
 
 def check_all(threshhold, query, email):
     valid_links = []
-    etsyPrices = getEtsyPrice(query)
-    prices = etsyPrices["prices"]
+    etsyPrices = json.loads(getEtsyPrice(query))
+    nordstromPrices = json.loads(getNordstromPrice(query))
+    prices = etsyPrices["prices"] 
     for key in prices:
-        if prices[key] <threshhold:
+        val = int(float(prices[key]))
+        if val <threshhold:
+            valid_links.append(key)
+    prices = nordstromPrices["prices"]       
+    for key in prices:
+        val = int(float(prices[key]))
+        if val <threshhold:
             valid_links.append(key)
     if len(valid_links)>=1:
         send_email(email, valid_links)
@@ -47,16 +54,17 @@ def send_email(email, urls):
     body += "WearElse team\n"
 
     message = f"Subject:{subject}\n\n{body} "
-    print(message)
+    
+    # print(message)
     server.sendmail("wearelse.noreply@gmail.com", email, message)
     print("bye")
     server.quit()
     pass
 
-query = "Levi’s Ribcage Straight Ankle Women's Jeans"
-threshhold = 100
+# query = "Air Jordan"
+# threshhold = 150
 
-# check_all(query, threshhold, "sazad2@illinois.edu")
+# print(check_all(threshhold, query, "sazad2@illinois.edu"))
 import time
 while True:
     
@@ -67,10 +75,10 @@ while True:
     for line in f:
         print(line)
         items = line.split(";")
-        email = item[0]
-        query = item[1]
-        threshold = item[2].replace("\n","")
-        if check_all(query, threshhold, )!= True:
+        email = items[0]
+        query = items[1]
+        threshhold = float(items[2].replace("\n",""))
+        if check_all( threshhold, query, email)!= True:
             new_file.append(line)
         
     f.close()
@@ -83,5 +91,6 @@ while True:
     f.write(result)
     f.close()
     
-    time.sleep(10)S
+    time.sleep(12*3600)
+
 
