@@ -1,11 +1,17 @@
 <html>
 <head>
-	<link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-	<link href='css/main.css' rel='stylesheet' type='text/css'>
+	<link href='{{url_for('static', filename='bootstrap.min.css')}}' rel='stylesheet' type='text/css'>
+	<link href='{{url_for('static', filename='main.css')}}' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 	<h1 class = "title"> WearElse </h1>
+	{% if name %}
+	  <h2>Welcome, {{ name }}!</h2>
+	{% else %}
+	  <h2>Welcome!</h2>
+	{% endif %}
+
 	<div class = "container">
 		<!-- Search form -->
 		<div class="search row">
@@ -23,7 +29,7 @@
 	<!--<script src='js/jquery-3.0.0.min.js'></script>
 	<script src='js/jquery-ui-1.12.1.min.js'></script>
 	<script src='js/bootstrap.min.js'></script>-->
-	<script src='my.js'></script>
+	<script src='../my.js'></script>
 </footer>
 
 </html>

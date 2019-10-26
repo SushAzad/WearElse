@@ -1,0 +1,300 @@
+Last login: Tue Aug 27 19:49:51 on ttys000
+amphy:~ amphy$ ssh turing
+Last login: Wed Sep 25 18:58:59 2019 from host-183-238.ilcmi2.champaign.il.us.clients.pavlovmedia.net
+amphy@turing ~ % su -p
+Password: 
+root@turing ~ # cd /var/www
+root@turing ~www # ls
+./             crypt3win/          LeagueAPIChallenge/  petsite/
+../            cybersecchallenge/  leaguepatch/         sekrit/
+airtalk/       heabuh.com/         lovenotes/           stories/
+airtalk2/      htdocs/             mixit/               travel/
+airtalk_fail/  html/               nltk_data/
+blog/          japan/              nohup.out
+cgi-bin/       japan.old/          perfectfit/
+root@turing ~www # cd blog
+root@turing ~www/blog # ls
+./   _config.yml  _drafts/  .gitignore  index.html  _posts/  .sass-cache/
+../  css/         feed.xml  _includes/  _layouts/   _sass/   _site/
+root@turing ~www/blog # less _drafts
+_drafts is a directory
+1 root@turing ~www/blog # ls _drafts
+./
+../
+2016-04-12-on-entitlement.markdown
+2016-05-01-life-doesnt-have-a-script.markdown
+2016-05-06-game-of-inches.markdown
+2016-08-23-failure.markdown
+root@turing ~www/blog # ls _posts
+./
+../
+2016-04-08-flask-url-tips.markdown
+2016-04-10-creating-flask-applications-on-apache.markdown
+2016-11-12-minix-service-tutorial.markdown
+2016-11-29-minix-getsysinfo.markdown
+2017-01-18-how-to-heroku.markdown
+test
+root@turing ~www/blog # less _posts/test
+root@turing ~www/blog # cp _posts/2017-01-18-how-to-heroku.markdown _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # jekyll build
+Configuration file: /var/www/blog/_config.yml
+            Source: /var/www/blog
+       Destination: /var/www/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.377 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # jekyll build
+Configuration file: /var/www/blog/_config.yml
+            Source: /var/www/blog
+       Destination: /var/www/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.278 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # jekyll build
+Configuration file: /var/www/blog/_config.yml
+            Source: /var/www/blog
+       Destination: /var/www/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.284 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # jekyll build
+Configuration file: /var/www/blog/_config.yml
+            Source: /var/www/blog
+       Destination: /var/www/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.266 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # jekyll build
+Configuration file: /var/www/blog/_config.yml
+            Source: /var/www/blog
+       Destination: /var/www/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.305 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+root@turing ~www/blog # less _posts/2017-01-18-how-to-heroku.markdown
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # jekyll build
+Configuration file: /var/www/blog/_config.yml
+            Source: /var/www/blog
+       Destination: /var/www/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.293 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+root@turing ~www/blog # jekyll build
+Configuration file: /var/www/blog/_config.yml
+            Source: /var/www/blog
+       Destination: /var/www/blog/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 0.28 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
+root@turing ~www/blog # vim _posts/2019-09-27-coding-bytes-diagonal-sort.markdown
+
+packet_write_wait: Connection to 206.217.140.241: Broken pipe
+amphy:~ amphy$ 
+amphy:~ amphy$  Bytes: Diagonal Sort"
+amphy:~ amphy$ -27 11:45:26 -0400
+amphy:~ amphy$ erviews algorithms
+amphy:~ amphy$ 
+amphy:~ amphy$ 
+_The other day I was taking a coding challenge and ran into a problem where I needed to sort along the diagonals of a matrix in ascending order. Upon looking around online after the challenge, I saw there weren't many solutions for approaching the problem, so this is my take on a possible solution._
+
+**Problem Statement:** Given a matrix of arbitrary width and height, sort along each diagonal in ascending order. Consider the diagonals parallel to the main diagonal which follows along `[0][0], [1][1], ..., [n][n]`.
+
+To start with this problem, let's consider two test cases. We will create two matrices `test1` and `test2`.
+
+{% highlight python %}
+test1 = [[2, 2], [1, 1]]
+test2 = [[9, 3, 1], [4, 5, 6], [8, 2, 5]]
+{% endhighlight %}
+</2019-09-27-coding-bytes-diagonal-sort.markdown" 114L, 5592C 1,1           Top
+  [Restored Oct 17, 2019, 10:26:48 PM]
+Last login: Thu Oct 17 22:26:47 on ttys001
+amphy-3:~ amphy$ ssh turing
+Last login: Fri Sep 27 23:32:46 2019 from host-183-238.ilcmi2.champaign.il.us.clients.pavlovmedia.net
+amphy@turing ~ % su -p
+Password: 
+root@turing ~ # cd /var/www
+root@turing ~www # ls
+./             crypt3win/          LeagueAPIChallenge/  petsite/
+../            cybersecchallenge/  leaguepatch/         sekrit/
+airtalk/       heabuh.com/         lovenotes/           stories/
+airtalk2/      htdocs/             mixit/               travel/
+airtalk_fail/  html/               nltk_data/
+blog/          japan/              nohup.out
+cgi-bin/       japan.old/          perfectfit/
+root@turing ~www # cd LeagueAPIChallenge
+root@turing ~www/LeagueAPIChallenge # ls
+./           LeagueAPIChallenge/      mysqlclient-python/  README.md      venv/
+../          LeagueAPIChallenge.py    python-eggs/         static/
+djangotest/  LeagueAPIChallenge.wsgi  query.py             templates/
+k.py         main.py                  query.pyc            urf-game-data
+root@turing ~www/LeagueAPIChallenge # cd LeagueAPIChallenge
+root@turing .../LeagueAPIChallenge/LeagueAPIChallenge (git)-[master] # ls
+./  ../  backup1.py  backup2.py  config.ini  .git/  .gitignore  venv/  views.py
+root@turing .../LeagueAPIChallenge/LeagueAPIChallenge (git)-[master] # less config.ini 
+root@turing .../LeagueAPIChallenge/LeagueAPIChallenge (git)-[master] # less .gitignore 
+
+
+*.rar
+*.tar
+*.zip
+ 
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Other files to ignore #
+#########################
+*.ini
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
