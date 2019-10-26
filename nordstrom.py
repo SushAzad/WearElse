@@ -3,6 +3,7 @@ import random
 import json
 
 def nordstrom(query):
+    res = []
     space_escaped = query.replace(" ", "%20") + "/"
     url = "https://shop.nordstrom.com/api/search/"+space_escaped
     querystring = {"top":"72","isMobile":"false","origin":"keywordsearch"}
@@ -19,14 +20,31 @@ def nordstrom(query):
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     json_data = json.loads(response.text)
-    key = random.choice(list(json_data["productsById"].keys()))
-    print("Original Price: ", json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"])
-    print("Sale Price: ", json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"])
-    media = json_data["productsById"][key]["mediaById"]
-    im = random.choice(list(media.keys()))
-    print("Image URL:", json_data["productsById"][key]["mediaById"][im]["src"])
-    prodPageUrl = "nordstom.com"+str(json_data["productsById"][key]["productPageUrl"])
-    print("Product Page Url: ",prodPageUrl)
-
+    count = 0
+    for key in json_data["productsById"].keys():
+        if count >5:
+            break
+        count +=1
+        title = json_data["pageData"]["title"]
+        price = json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"]
+        # print("Original Price: ", price)
+        sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
+        # print("Sale Price: ",sale_price)
+        media = json_data["productsById"][key]["mediaById"]
+        im = random.choice(list(media.keys()))
+        img_url = json_data["productsById"][key]["mediaById"][im]["src"]
+        # print("Image URL:",img_url )
+        prodPageUrl = "nordstom.com"+str(json_data["productsById"][key]["productPageUrl"])
+        # print("Product Page Url: ",prodPageUrl)
+        res.append({"title": title,
+                    "description": query,
+                    "link": prodPageUrl,
+                    "img_url": img_url,
+                    "price": price,
+                    "sale_price": sale_price})
+    
+    results =  json.dumps({"results":res})
+    print(results)
+    return results
 q = "Natori Rose Dream Custom Coverage Underwire Bra"
-nordstrom(q)
+results = nordstrom(q)
