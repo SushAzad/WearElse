@@ -67,16 +67,19 @@ def getNordstromResults(query):
         if count >5:
             break
         count +=1
-        title = json_data["pageData"]["title"]
+        title = json_data["productsById"][key]["name"]
         price = json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"]
         # print("Original Price: ", price)
         #sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
         # print("Sale Price: ",sale_price)
         media = json_data["productsById"][key]["mediaById"]
-        im = random.choice(list(media.keys()))
-        img_url = json_data["productsById"][key]["mediaById"][im]["src"]
+        img_url= ""
+        for k in media.keys():
+            if media[k]["group"]=="main":
+                img_url = media[k]["src"]
+                break
         # print("Image URL:",img_url )
-        prodPageUrl = "nordstom.com"+str(json_data["productsById"][key]["productPageUrl"])
+        prodPageUrl = "https://shop.nordstrom.com"+str(json_data["productsById"][key]["productPageUrl"])
         # print("Product Page Url: ",prodPageUrl)
         res.append({"title": title,
                     "description": query,

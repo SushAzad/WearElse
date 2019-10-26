@@ -25,7 +25,8 @@ def nordstrom(query):
         if count >5:
             break
         count +=1
-        title = json_data["pageData"]["title"]
+        title = json_data["pageData"][key]["name"]
+        print(title)
         price = json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"]
         # print("Original Price: ", price)
        # sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
@@ -47,5 +48,5 @@ def nordstrom(query):
     return results
 
 
-q = "jeans"
+q = "Air Jordan"
 results = nordstrom(q)
