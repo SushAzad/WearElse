@@ -43,6 +43,9 @@ def send_email(email, urls):
     body = "Hi! \n" 
     for u in urls:
         body+= u+"\n"
+    body += "With best regards,\n"
+    body += "WearElse team\n"
+
     message = f"Subject:{subject}\n\n{body} "
     print(message)
     server.sendmail("wearelse.noreply@gmail.com", email, message)
@@ -52,5 +55,33 @@ def send_email(email, urls):
 
 query = "Levi’s Ribcage Straight Ankle Women's Jeans"
 threshhold = 100
-result = check_all(query, threshhold, "sazad2@illinois.edu")
-print(result)
+
+# check_all(query, threshhold, "sazad2@illinois.edu")
+import time
+while True:
+    
+    f= open("price_track_database.txt")
+    new_file = []
+    
+    
+    for line in f:
+        print(line)
+        items = line.split(";")
+        email = item[0]
+        query = item[1]
+        threshold = item[2].replace("\n","")
+        if check_all(query, threshhold, )!= True:
+            new_file.append(line)
+        
+    f.close()
+    
+    
+    new_file = list(filter(None, new_file))
+    result = "".join(new_file)
+    
+    f = open("price_track_database.txt", 'w')
+    f.write(result)
+    f.close()
+    
+    time.sleep(10)S
+
