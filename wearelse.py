@@ -34,7 +34,9 @@ def handle_data():
 	total = nordstromResults["results"] + etsyResults["results"]
 	result = json.dumps({"results": total})
 	#r = requests.post(url_for('get_search_results'), data = result)
-	return render_template('results.html', items=total)
+	pretty_query = request.args.get('query')
+	pretty_query = pretty_query[1:-1]
+	return render_template('results.html', items=total, query=pretty_query)
 '''
 Items list has JSON object of 
 img, title, price for each item.
