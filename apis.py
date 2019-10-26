@@ -29,7 +29,7 @@ def getEtsyResults(query):
             print(d['price'])
             print(d['url'])
             print(data2['results'][0]['url_570xN'])
-
+            
             res.append({"title": d['title'],
                 "description": d['description'],
                 "price": d['price'],
