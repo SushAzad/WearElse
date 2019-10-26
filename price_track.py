@@ -18,7 +18,7 @@ def compare(url, price, email):
     cur = float(cur.get_text()[1:].replace(",",""))
     if cur <price:
         send_email(email, url)
-        
+
 def check_all(threshhold, query, email):
     valid_links = []
     etsyPrices = getEtsyPrice(query)
@@ -47,13 +47,15 @@ def send_email(email, urls):
     body += "WearElse team\n"
 
     message = f"Subject:{subject}\n\n{body} "
+    print(message)
     server.sendmail("wearelse.noreply@gmail.com", email, message)
     print("bye")
     server.quit()
     pass
 
-query = "Air Jordan"
+query = "Levi’s Ribcage Straight Ankle Women's Jeans"
 threshhold = 100
+
 # check_all(query, threshhold, "sazad2@illinois.edu")
 import time
 while True:
@@ -81,4 +83,5 @@ while True:
     f.write(result)
     f.close()
     
-    time.sleep(10)
+    time.sleep(10)S
+
