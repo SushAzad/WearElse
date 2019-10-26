@@ -16,7 +16,7 @@ def getEtsyPrice(query):
         r = requests.get(url = URL, params = PARAMS)
 
         data = r.json()
-        print(data)
+        # print(data)
         res = []
         prices_dict = {}
         for d in data['results']:
@@ -25,11 +25,11 @@ def getEtsyPrice(query):
             r2 = requests.get(url = URL2, params = PARAMS2)
             data2 = r2.json()
             
-            print(d['title'])
-            print(d['description'])
-            print(d['price'])
-            print(d['url'])
-            print(data2['results'][0]['url_570xN'])
+            # print(d['title'])
+            # print(d['description'])
+            # print(d['price'])
+            # print(d['url'])
+            # print(data2['results'][0]['url_570xN'])
 
             res.append({"title": d['title'],
                 "description": d['description'],
@@ -40,7 +40,6 @@ def getEtsyPrice(query):
 
         return json.dumps({"prices": prices_dict})
     except:
-        print("ERROR: config.ini not created or request is bad")
         return json.dumps({"prices" : {}}) 
 
 def getNordstromPrice(query):
@@ -48,7 +47,7 @@ def getNordstromPrice(query):
     res = []
     space_escaped = query.replace(" ", "%20") + "/"
     url = "https://shop.nordstrom.com/api/search/"+space_escaped
-    print(url)
+    #print(url)
     querystring = {"top":"72","isMobile":"false","origin":"keywordsearch"}
     headers = {
         'User-Agent': "PostmanRuntime/7.18.0",
@@ -62,7 +61,7 @@ def getNordstromPrice(query):
         }
     prices_dict = {}
     response = requests.request("GET", url, headers=headers, params=querystring)
-    print(response)
+    #print(response)
     json_data = json.loads(response.text)
     count = 0
     for key in json_data["productsById"].keys():
@@ -89,5 +88,5 @@ def getNordstromPrice(query):
                     "img_url": img_url,
                     "price": price})
         prices_dict[prodPageUrl]=price
-    print(prices_dict)
+    #print(prices_dict)
     return json.dumps({"prices":prices_dict})
