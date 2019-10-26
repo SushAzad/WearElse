@@ -75,3 +75,7 @@ body {
     color: #5eb7b7;
     transition: all .2s ease-in;
 }
+
+.modal-title{
+	display: inline;
+}

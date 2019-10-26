@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from priceChecker import getEtsyPrice, getNordstromPrice
 import smtplib
 
 
@@ -17,20 +18,37 @@ def compare(url, price, email):
     cur = float(cur.get_text()[1:].replace(",",""))
     if cur <price:
         send_email(email, url)
-def send_email(email, url):
+        
+def check_all(threshhold, query, email):
+    valid_links = []
+    etsyPrices = getEtsyPrice(query)
+    prices = etsyPrices["prices"]
+    for key in prices:
+        if prices[key] <threshhold:
+            valid_links.append(key)
+    if len(valid_links)>=1:
+        send_email(email, valid_links)
+        return True
+    else:
+        return False
+
+def send_email(email, urls):
     print("hi")
     server = smtplib.SMTP('smtp.gmail.com',587)
     server.ehlo()
     server.starttls()
     server.ehlo()
-    
     server.login('wearelse.noreply@gmail.com', 'rakgfgkhljkajwak')
-    subject = 'price fell'
-    body = "hi \n" + url
+    subject = 'The price of your item has fallen!'
+     body = "Hi! \n" 
+    for u in urls:
+        body+= u+"\n"
     message = f"Subject:{subject}\n\n{body} "
     server.sendmail("wearelse.noreply@gmail.com", email, message)
     print("bye")
     server.quit()
     pass
 
-compare(urll, 150, "sazad2@illinois.edu")
+query = "Air Jordan"
+threshhold = 100
+check_all(query, threshhold, "sazad2@illinois.edu")
