@@ -58,35 +58,37 @@ def getNordstromResults(query):
         'Connection': "keep-alive",
         'cache-control': "no-cache"
         }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    print(response)
-    json_data = json.loads(response.text)
-    count = 0
-    for key in json_data["productsById"].keys():
-        if count >5:
-            break
-        count +=1
-        title = json_data["productsById"][key]["name"]
-        price = json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"]
-        # print("Original Price: ", price)
-        #sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
-        # print("Sale Price: ",sale_price)
-        media = json_data["productsById"][key]["mediaById"]
-        img_url= ""
-        for k in media.keys():
-            if media[k]["group"]=="main":
-                img_url = media[k]["src"]
+    try:
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        print(response)
+        json_data = json.loads(response.text)
+        count = 0
+        for key in json_data["productsById"].keys():
+            if count >5:
                 break
-        # print("Image URL:",img_url )
-        prodPageUrl = "https://shop.nordstrom.com"+str(json_data["productsById"][key]["productPageUrl"])
-        # print("Product Page Url: ",prodPageUrl)
-        res.append({"title": title,
-                    "description": query,
-                    "link": prodPageUrl,
-                    "img_url": img_url,
-                    "price": price})
-    
+            count +=1
+            title = json_data["productsById"][key]["name"]
+            price = json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"]
+            # print("Original Price: ", price)
+            #sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
+            # print("Sale Price: ",sale_price)
+            media = json_data["productsById"][key]["mediaById"]
+            img_url= ""
+            for k in media.keys():
+                if media[k]["group"]=="main":
+                    img_url = media[k]["src"]
+                    break
+            # print("Image URL:",img_url )
+            prodPageUrl = "https://shop.nordstrom.com"+str(json_data["productsById"][key]["productPageUrl"])
+            # print("Product Page Url: ",prodPageUrl)
+            res.append({"title": title,
+                        "description": title,
+                        "link": prodPageUrl,
+                        "img_url": img_url,
+                        "price": price})
+    except:
+        print("Misformed query!")    
     results =  json.dumps({"results":res})
     print(results)
     return results
+    
