@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 import random
 import requests
 import configparser
@@ -32,13 +32,16 @@ def handle_data():
 	etsyResults = json.loads(getEtsyResults(request.args.get('query')))
 
 	total = nordstromResults["results"] + etsyResults["results"]
-	return str(total)
+	result = json.dumps({"results": total})
+	#r = requests.post(url_for('get_search_results'), data = result)
+	return render_template('results.html', items=total)
 '''
 Items list has JSON object of 
 img, title, price for each item.
 '''
-@app.route('/results')
+@app.route('/results', methods=["POST"])
 def get_search_results(items_list=None):
-	
-	return render_template('results.html', items=test)
+	json_dict = request.get_json()
+	items_list = json_dict["results"]
+	return render_template('results.html', items=items_list)
 
