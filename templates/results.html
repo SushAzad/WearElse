@@ -1,13 +1,18 @@
 <html>
 <head>
-	<link href='../css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-	<link href='../css/main.css' rel='stylesheet' type='text/css'>
+	<link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<link href='css/main.css' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 	<h1 class = "title"> WearElse </h1>
 	<div class = "container">
-		<!-- Search form -->
+		{% for item in items %}
+			<div class = "row cloth">
+				<div class ="img col-xs-4"><img src="{{img_url}}"></div>
+				<div class ="description col-xs-8">{{item.title}}</div>
+			</div>
+	  {% endfor %}
 		<div class = "row cloth">
 			<div class ="img col-xs-4"><img src="ghost.jpg"></div>
 			<div class ="description col-xs-8">Levi's Jeans Size 1 $69</div>
@@ -23,7 +28,7 @@
 	<!--<script src='js/jquery-3.0.0.min.js'></script>
 	<script src='js/jquery-ui-1.12.1.min.js'></script>
 	<script src='js/bootstrap.min.js'></script>-->
-	<script src='../my.js'></script>
+	<script src='my.js'></script>
 </footer>
 
 </html>
