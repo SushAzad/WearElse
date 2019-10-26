@@ -70,7 +70,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="save_alert" type="button" class="btn btn-primary">Save Alert! </button>
+        <button id="save_alert2" type="button" class="btn btn-primary">Save Alert! </button>
       </div>
     </div>
   </div>
@@ -90,6 +90,19 @@
 		if(query_string!=""){
 			console.log("{{ url_for('handle_data') }}?query=\'" + query_string+"\'");
 			window.location.href = "{{ url_for('handle_data') }}?query=\'" + query_string+"\'";
+		}
+		
+	};
+
+	var alertButton = document.getElementById("save_alert2");
+	alertButton.onclick = function(){
+		var query_string = document.getElementById("search-query").value
+		var max_amt = document.getElementById("max_price").value
+		var email = document.getElementById("email").value
+		// don't allow empty queries as that overloads Nordstrom's API 
+		if(query_string!=""){
+			console.log("{{ url_for('trigger_alert') }}?query=\'" + query_string+"\'&email="+email+"&max_amt="+max_amt);
+			window.location.href = "{{ url_for('trigger_alert') }}?query=\'" + query_string+"\'&email="+email+"&max_amt="+max_amt;
 		}
 		
 	};

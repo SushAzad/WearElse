@@ -17,11 +17,9 @@ test = [
     "img_url": "http://jiaqiwu.com/portrait_2019.jpeg", "price": 8.99, "sale_price": 8.99}, 
 ]
 
-
 @app.route('/')
 def hello(name=None):
     return render_template('index.html', name=name)
-
 
 @app.route('/handle_data', methods=['GET'])
 def handle_data():
@@ -46,4 +44,15 @@ def get_search_results(items_list=None):
 	json_dict = request.get_json()
 	items_list = json_dict["results"]
 	return render_template('results.html', items=items_list)
+
+@app.route('/alerts', methods=["GET"])
+def trigger_alert():
+	email = request.args.get('email')
+	max_amt = request.args.get('max_amt')
+	query = request.args.get('query')
+	entry = str(email)+";"+str(query)+";"+str(max_amt)+"\n"
+	with open("price_track_database.txt", "a") as myfile:
+		myfile.write(entry)
+
+	return redirect(url_for("handle_data")+"?query=\'"+query+"\'")
 
