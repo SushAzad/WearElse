@@ -1,0 +1,12 @@
+.title {
+	text-align: center;
+}
+
+.img img {
+	max-height: 150px;
+}
+
+.cloth {
+	width: 100%;
+	position:relative;
+}
