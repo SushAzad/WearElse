@@ -6,29 +6,37 @@ h1 {
 	font-family: 'Montserrat', sans-serif;
 }
 
-body {
-	background-color: #dcefec;
+.main {
 	margin-top: 10%;
+}
+
+body {
+	margin-top: 25px;
 	text-align: center;
+	background-color: #dcefec;
+}
+
+.cloth,.results-title {
+	text-align: left;
 }
 
 #top-corner {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 15px;
+	right: 15px;
 }
 
 #about {
 	visibility: hidden;
 	transition: all .2s ease-in;
 	position: absolute;
-	top: 15;
-	right: 15;
+	top: 25px;
+	right: 25px;
 	max-width: 400px;
 	background-color: #ffe6e6;
-	border-color: #fc7978;
+	border: 1px solid #fc7978;
 	color: #fc7978;
-	border: 3px;
+	
 }
 
 #logo {
@@ -78,4 +86,9 @@ body {
 
 .modal-title{
 	display: inline;
+}
+
+.alert-btn:active, .alert-btn:hover, .alert-btn:focus {
+	border: none;
+	outline: 0;
 }

@@ -2,6 +2,7 @@
 <head>
 	<link href='{{url_for('static', filename='bootstrap.min.css')}}' rel='stylesheet' type='text/css'>
 	<link href='{{url_for('static', filename='main.css')}}' rel='stylesheet' type='text/css'>
+	<link href='{{url_for('static', filename='fontawesome/css/all.css')}}' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -16,11 +17,15 @@
 				<input id = "submit-query" class="form-control" type="submit" value="Find it!" aria-label="Search">
 			</div>
 			<div class = "col-xs-1">
-				<a href="" data-toggle="modal" data-target="#exampleModalLong"><input class="form-control" type="submit" value="Create Alert" aria-label="Search"></a>
+				<!-- <a href="" data-toggle="modal" data-target="#exampleModalLong"><input class="form-control" type="submit" value="Create Alert" aria-label="Search"></a> -->
+				<a href="" data-toggle="modal" data-target="#exampleModalLong"><button id="save_alert" type="button" class="btn btn-secondary form-control alert-btn"><i class="fas fa-lg fa-bell"></i></button></a>
 			</div>
 		</div>
-
-		<h2>Results: </h2>
+		<div class = "row">
+			<div class = "col-xs-offset-1 col-xs-10">
+				<h2 class = "results-title"> Results: </h2>
+			</div>
+		</div>
 		{% for item in items %}
 			<div class = "row cloth">
 				<div class ="img col-xs-offset-1 col-xs-4"><img src="{{item.img_url}}"></div>
@@ -62,12 +67,6 @@
 						<input id="max_price" class="form-control" type="numeric" placeholder="420.00" />
 					</div>
 				</div> <br><Br>
-<!-- 				<div class = "row">
-					<div class = "col-xs-offset-1 col-xs-10">
-						<input id = "submit-query" class="form-control" type="submit" value="Alert Me!" aria-label="Search">
-					</div>
-				</div> -->
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -82,6 +81,19 @@
 <footer>
 	<script src='{{url_for('static', filename='jquery-3.0.0.min.js')}}'></script>
 	<script src='{{url_for('static', filename='bootstrap.min.js')}}'></script>
+
+	<script>
+	var button = document.getElementById("submit-query");
+	button.onclick = function(){
+		var query_string = document.getElementById("search-query").value
+		// don't allow empty queries as that overloads Nordstrom's API 
+		if(query_string!=""){
+			console.log("{{ url_for('handle_data') }}?query=\'" + query_string+"\'");
+			window.location.href = "{{ url_for('handle_data') }}?query=\'" + query_string+"\'";
+		}
+		
+	};
+	</script>
 
 	<!--<script src='js/jquery-3.0.0.min.js'></script>
 	<script src='js/jquery-ui-1.12.1.min.js'></script>
