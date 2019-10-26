@@ -5,8 +5,7 @@ import json
 
 app = Flask(__name__)
 
-test = '''
-[
+test = [
 	{"title": "Black turtleneck sweater", "description": "100% cotton, from H&M!", "link": "http://google.com", 
     "img_url": "http://jiaqiwu.com/portrait_2019.jpeg", "price": 8.99, "sale_price": 8.99}, 
   {"title": "Purple turtleneck sweater", "description": "100% cotton, from H&M!", "link": "http://google.com", 
@@ -14,7 +13,7 @@ test = '''
   {"title": "Pink turtleneck sweater", "description": "100% cotton, from H&M!", "link": "http://google.com", 
     "img_url": "http://jiaqiwu.com/portrait_2019.jpeg", "price": 8.99, "sale_price": 8.99}, 
 ]
-'''
+
 
 # @app.route('/')
 # def hello_word():
