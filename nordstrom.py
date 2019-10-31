@@ -40,8 +40,18 @@ def nordstrom(query):
 		# print("Image URL:",img_url )
 		prodPageUrl = "nordstom.com"+str(json_data["productsById"][key]["productPageUrl"])
 		# print("Product Page Url: ",prodPageUrl)
+		
+		# make sure title length isn't too long or else it looks funny
+		
+		full_title = title
+		
+		if len(title) > 75:
+			title = title[:75]
+			
+		
+		# changed description to display the title instead of query...query seems repetitive 
 		res.append({"title": title,
-					"description": query,
+					"description": full_title,
 					"link": prodPageUrl,
 					"img_url": img_url,
 					"price": price})
