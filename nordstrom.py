@@ -26,10 +26,10 @@ def nordstrom(query):
 			break
 		count +=1
 		title = json_data["productsById"][key]["name"]
-		print(title)
+		#print(title)
 		price = json_data["productsById"][key]["pricesById"]["original"]["minItemPrice"]
 		# print("Original Price: ", price)
-	   # sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
+	   	# sale_price =  json_data["productsById"][key]["pricesById"]["sale"]["minItemPrice"]
 		# print("Sale Price: ",sale_price)
 		media = json_data["productsById"][key]["mediaById"]
 		img_url= ""
@@ -46,8 +46,7 @@ def nordstrom(query):
 		full_title = title
 		
 		if len(title) > 75:
-			title = title[:75]
-			
+			title = title[:75] + "..."
 		
 		# changed description to display the title instead of query...query seems repetitive 
 		res.append({"title": title,
